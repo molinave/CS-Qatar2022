@@ -1,17 +1,18 @@
 const Estadia = require('../models/Estadia');
 
-const createEstadia = (estadia) =>{
+const createEstadia = async(estadia) =>{
     const resEstadia = new Estadia(estadia);
+    await resEstadia.save();
     return resEstadia;
 };
 
-const updateEstadia = (estadia, estadiaId) =>{
-    const resEstadia = Estadia.findByIdAndUpdate(estadiaId,{$set:estadia},{new:true});
+const updateEstadia = async(estadia, estadiaId) =>{
+    const resEstadia = await Estadia.findByIdAndUpdate(estadiaId,{$set:estadia},{new:true});
     return resEstadia;
 };
 
-const deleteEstadia = (estadiaId) =>{
-    const resEstadia = Estadia.findByIdAndDelete(estadiaId);
+const deleteEstadia = async(estadiaId) =>{
+    const resEstadia = await Estadia.findByIdAndDelete(estadiaId);
     return resEstadia;
 }
 

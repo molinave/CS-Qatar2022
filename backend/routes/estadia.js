@@ -1,19 +1,19 @@
 const {Router} = require('express');
 const {
-    createEstadia,
-    updateEstadia,
+    crearEstadia,
+    actualizarEstadia,
     getEstadiaById,
     getAllEstadia,
-    deteleEstadia
+    elimiarEstadia
 }=require('../controllers/estadia');
 const router =Router();
 
 router.post(
-    '/',createEstadia
+    '/',crearEstadia
 );
 
 router.put(
-    '/:estadiaId',updateEstadia
+    '/:estadiaId',actualizarEstadia
 );
 
 router.get(
@@ -25,7 +25,7 @@ router.get(
 );   
 
 router.delete(
-    '/:estadiaId',deteleEstadia
+    '/:estadiaId',elimiarEstadia
 );
 
 module.exports = router;

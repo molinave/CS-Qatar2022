@@ -8,36 +8,23 @@ const {
 
 const crearEstadia = async(req,res=response)=>{
     //console.log("Se guardo",req.body)
-    const estadia = createEstadia(req.body);
-    //const estadia=new Estadia(req.body)
-    
-    await estadia.save(function(err,suc){
-        if(err){
-            console.log(err)
-        }
-        res.status(201).json({
-            ok:true,
-            msg:'se registro la Estadia',
-            id:suc._id
-        })
-    })
-}
+    try {
+        const estadia = createEstadia(req.body);
+        res.status(200).send(estadia)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
 
 const actualizarEstadia = async(req,res=response)=>{
-    const estadia = updateEstadia(req.body,req.params._id)
-    //const estadiaId=req.params.estadiaId
-    //const estadia=req.body
-    //await Estadia.findByIdAndUpdate(estadiaId,{$set:estadia},{new:true})
-    await estadia.save(function(err,suc){
-        if(err){
-            console.log(err);
-        };
-        res.status(201).json({
-            ok:true,
-            msg:'estadia actualizada'
-        })
-    })
-}
+    try {
+        const estadiaBody = req.body;
+        const estadia = updateEstadia(estadiaBody,req.params.estadiaId);
+        res.status(200).send(estadia)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
 
 const getEstadiaById = async(req,res=response)=>{
     console.log(req)
@@ -59,22 +46,18 @@ const getAllEstadia = async(req,res=response)=>{
 }
 
 const elimiarEstadia = (req,res=response)=>{
-    const estadia = deleteEstadia(req.params._id);
-    estadia.save(function(err,suc){
-        if (err) {
-            console.log(err);
-        };
-        res.status(201).json({
-            ok: true,
-            msg: 'Estadia eliminada'
-        })
-    })
+    try {
+        const estadia = deleteEstadia(req.params.estadiaId);
+        res.status(200).send(estadia)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 };
 
 module.exports ={
     crearEstadia,
     actualizarEstadia,
-    //getEstadiaById,
-    //getAllEstadia,
+    getEstadiaById,
+    getAllEstadia,
     elimiarEstadia
 }

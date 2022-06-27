@@ -26,7 +26,7 @@ const{
     app.use('/api/auth/',require('./routes/auth'));
     app.use('/api/evento/',require('./routes/evento'));
     app.use('/api/estadia/',require('./routes/estadia'));
-    app.use('/api/paquete/',require('./routes/paqueteviaje'));
+    app.use('/api/paquete/',require('./routes/paquete'));
     app.use('/api/compra/',require('./routes/compra'));
 //
 //controlCompra();

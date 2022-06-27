@@ -9,56 +9,46 @@ const {
 } = require('../repositories/evento')
 
 const crearEvento = async(req,res=response)=>{
-    //console.log("Se guardo",req.body)
-    const evento = createEvento(req.body);
-    
-    await evento.save(function(err,suc){
-        if(err){
-            console.log(err)
-        }
-        res.status(201).json({
-            ok:true,
-            msg:'registro Evento creado',
-            id:suc._id
-        })
-    })
+    try {
+        const evento = req.body;
+        const response = await createEvento(evento);
+        res.status(200).send(response)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 }
 
 const actualizarEvento = async(req,res=response)=>{
-    const evento = updateEvento(req.body,req.params.eventoId);
-    await evento.save(function(err){
-        if (err) {
-            console.log(err)
-        }
-        res.status(201).json({
-            ok:true,
-            msg:'Evento actualizado',
-        })
-    })
+    try {
+        const evento = req.body;
+        const response = updateEvento(evento,req.params.eventoId);
+        res.status(200).send(response)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 };
 
 const eliminarEvento = async(req,res=response)=>{
-    const evento = deleteEvento(req.params._id);
-    await evento.save(function(err){
-        if (err) {
-            console.log(err);
-        }
-        res.status.json({
-            ok:true,
-            msg:'Evento eliminado'
-        })
-    })
+    try {
+        const response = deleteEvento(req.params.eventoId);
+        res.status(200).send(response);
+    } catch (error) {
+        res.status(500).send(error.message)
+    };
 };
 
 const getAllEvento = async(req,res=response)=>{
-    const eventos = getAllEventos(req.body);
+    const eventos = getAllEventos();
+    console.log(eventos)
     res.json({
         eventos
     })
 };
 
 const getEvento = async(req,res=response)=>{
-    const evento = getEventoById(req.params._id);
+    const eventoId = req.params._id;
+    const evento = getEventoById(eventoId);
+    console.log(evento);
     res.json({
         evento
     })

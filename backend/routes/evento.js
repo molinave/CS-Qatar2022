@@ -2,8 +2,9 @@ const {Router} = require('express');
 const {
     crearEvento,
     actualizarEvento,
-    getEventoById,
-    getAllEvento
+    getEvento,
+    getAllEvento,
+    eliminarEvento
 }=require('../controllers/evento');
 const router =Router();
 
@@ -17,6 +18,13 @@ router.put(
 
 router.get('/',getAllEvento);
 
-router.get('/:eventoId', getEventoById);
+router.delete(
+    '/:eventoId',eliminarEvento
+);
+router.get(
+    '/:eventoId',getEvento
+);
+
+//router.get('/:eventoId', getEventoById);
 
 module.exports = router;
