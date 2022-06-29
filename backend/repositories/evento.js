@@ -1,7 +1,7 @@
 const Evento = require('../models/Evento');
 
 const createEvento = async(evento)=>{
-    const resEvento = new Evento(evento);
+    const resEvento = await new Evento(evento);
     await resEvento.save()
     return resEvento;
 };

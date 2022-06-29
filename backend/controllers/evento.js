@@ -21,7 +21,7 @@ const crearEvento = async(req,res=response)=>{
 const actualizarEvento = async(req,res=response)=>{
     try {
         const evento = req.body;
-        const response = updateEvento(evento,req.params.eventoId);
+        const response = await updateEvento(evento,req.params.eventoId);
         res.status(200).send(response)
     } catch (error) {
         res.status(500).send(error.message);
@@ -30,7 +30,7 @@ const actualizarEvento = async(req,res=response)=>{
 
 const eliminarEvento = async(req,res=response)=>{
     try {
-        const response = deleteEvento(req.params.eventoId);
+        const response = await deleteEvento(req.params.eventoId);
         res.status(200).send(response);
     } catch (error) {
         res.status(500).send(error.message)
@@ -38,17 +38,16 @@ const eliminarEvento = async(req,res=response)=>{
 };
 
 const getAllEvento = async(req,res=response)=>{
-    const eventos = getAllEventos();
-    console.log(eventos)
+    const eventos = await getAllEventos();
     res.json({
         eventos
     })
 };
 
 const getEvento = async(req,res=response)=>{
-    const eventoId = req.params._id;
-    const evento = getEventoById(eventoId);
-    console.log(evento);
+    const eventoId = req.params.eventoId;
+    const evento = await getEventoById(eventoId);
+    console.log(eventoId);
     res.json({
         evento
     })

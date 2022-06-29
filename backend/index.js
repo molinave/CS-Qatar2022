@@ -28,6 +28,8 @@ const{
     app.use('/api/estadia/',require('./routes/estadia'));
     app.use('/api/paquete/',require('./routes/paquete'));
     app.use('/api/compra/',require('./routes/compra'));
+    app.use('/api/transporte',require('./routes/transporte'));
+    app.use('/api/seguro',require('./routes/seguro'));
 //
 //controlCompra();
 //obtener todos los correos de los usuarios

@@ -1,28 +1,28 @@
-const { findById, findByIdAndDelete } = require('../models/Transporte');
 const Transporte = require('../models/Transporte');
 
-const createTransporte = (transporte) =>{
+const createTransporte = async(transporte) =>{
     const newTransporte = await new Transporte(transporte);
+    await newTransporte.save()
     return newTransporte;
 };
 
 const updateTransporte = async (transporte,idTransporte) =>{
-    const resTransporte = await Transporte.findById(idTransporte);
-    const newTransporte = await resTransporte.update(transporte);
+    const newTransporte = await Transporte.findByIdAndUpdate(idTransporte,{$set:transporte},{new:true});
     return newTransporte;
 };
 
 const findAllTransporte = async(queries) =>{
-    return Transporte.findAll(queries);
+    const response = await Transporte.find(queries);
+    return response;
 };
 
 const findTranporte = async(idTranporte) =>{
-    const resTransporte = findById(idTranporte);
+    const resTransporte = await Transporte.findById(idTranporte);
     return resTransporte;
 };
 
 const deleteTransporte = async(idTransporte) =>{
-    const resTransporte = findByIdAndDelete(idTransporte);
+    const resTransporte = await Transporte.findByIdAndDelete(idTransporte);
     return resTransporte;
 };
 
