@@ -31,7 +31,7 @@ const{
     app.use('/api/transporte',require('./routes/transporte'));
     app.use('/api/seguro',require('./routes/seguro'));
 //
-//controlCompra();
+controlCompra();
 //obtener todos los correos de los usuarios
 const transporter = nodemailer.createTransport({
     service: "gmail",

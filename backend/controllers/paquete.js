@@ -1,8 +1,9 @@
-const {response}=require('express');
+const {response, response}=require('express');
 const Paquete = require('../models/Paquete');
 const url = require('url');
 const querystring = require('querystring');
-const { newPaquete, actualizarPaquete, eliminarPaquete } = require('../repositories/paquete');
+const { newPaquete, actualizarPaquete, eliminarPaquete, findPaquete } = require('../repositories/paquete');
+const { find } = require('../models/Paquete');
 
 const createPaquete = async(req,res=response)=>{
     try {
@@ -26,13 +27,11 @@ const updatePaquete = async(req,res=response)=>{
 };
 
 const getPaqueteById = async(req,res=response)=>{
-    console.log(req)
     const paqueteId=req.params.paqueteId
-    const paquete=await Paquete.findById(paqueteId)
+    const response = findPaquete(paqueteId)
      //usar en paquete con los diferentes idS
-    console.log(paquete)
     res.json({
-        paquete
+        response
     })
 }
 

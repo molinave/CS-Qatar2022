@@ -1,7 +1,7 @@
 const Paquete = require('../models/Paquete');
 
 
-const findAllPaquete = (queries) =>{
+const findAllPaquete = async(queries) =>{
     const paquete = await Paquete.find(queries);
     return paquete;
 };
@@ -35,7 +35,7 @@ const UpdateState = async(idPaquete) =>{
     return paquete;
 };
 
-const eliminarPaquete = (paqueteId) =>{
+const eliminarPaquete = async(paqueteId) =>{
     const paquete = await Paquete.findByIdAndDelete(paqueteId);
     return paquete;
 };
