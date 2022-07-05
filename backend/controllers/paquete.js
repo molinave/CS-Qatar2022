@@ -2,32 +2,28 @@ const {response}=require('express');
 const Paquete = require('../models/Paquete');
 const url = require('url');
 const querystring = require('querystring');
+const { newPaquete, actualizarPaquete, eliminarPaquete } = require('../repositories/paquete');
 
 const createPaquete = async(req,res=response)=>{
-    console.log("Se guardo",req.body)
-    
-    const paquete=new Paquete(req.body)
-    paquete.partido.cant_partidos=paquete.partido.name.length
-    await paquete.save(function(err,suc){
-        if(err){
-            console.log(err)
-        }
-        res.status(201).json({
-            ok:true,
-            msg:'se registro el paquete',
-            id:suc._id
-        })
-    })
-}
+    try {
+        const paquete = req.body;
+        const response = await newPaquete(paquete);
+        res.status(200).send(response);
+    return paquete;
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
 
 const updatePaquete = async(req,res=response)=>{
-    const paqueteId=req.params.paqueteId
-    const paquete=req.body
-    await Paquete.findByIdAndUpdate(paqueteId,{$set:paquete},{new:true})
-    res.json({
-        msg:'estadia actualizada'
-    })
-}
+    try {
+        const paqueteId = req.params.paqueteId;
+        const response = actualizarPaquete(paqueteId,req.body);
+        res.status(200).send(response);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
 
 const getPaqueteById = async(req,res=response)=>{
     console.log(req)
@@ -60,16 +56,14 @@ const getAllPaquete = async(req,res=response)=>{
 
 
 const detelePaquete = (req,res=response)=>{
-    const paqueteId=req.params.paqueteId
-    Paquete.findByIdAndDelete(paqueteId,function(err,suc){ //analizar
-        if(err){
-            console.log(err)
-        }
-        res.json({
-            msg:'Hasta la vista baby'
-        })
-    }) //analizar
-}
+    try {
+        const paqueteId=req.params.paqueteId
+        const response = eliminarPaquete(paqueteId);
+        res.status(200).send(response);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};
 
 module.exports ={
     createPaquete,

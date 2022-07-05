@@ -1,31 +1,18 @@
-const { getEvento } = require('../controllers/evento');
-const { getTransporteById } = require('../controllers/transporte');
 const Paquete = require('../models/Paquete');
-const { getEstadiaId } = require('./estadia');
-const { findSeguro } = require('./seguro');
+
 
 const findAllPaquete = (queries) =>{
     const paquete = await Paquete.find(queries);
     return paquete;
 };
 
-const updatePaquete = async (paquete, idPaquete) => {
+const actualizarPaquete = async (paquete, idPaquete) => {
     const resPaquete = await Paquete.findByIdAndUpdate(idPaquete,{$set:paquete},{new:true});
     return resPaquete;
 };
 
-const createPaquete = async (paquete) =>{
+const newPaquete = async (paquete) =>{
     const newPaquete = await new Paquete(paquete);
-    const eventos = paquete.eventos;
-    eventos.forEach(eventoId => {
-        const evento = await getEvento(eventoId);
-        //guardar informacion en paquete
-    });
-    const estadia = await getEstadiaId(paquete.estadia);
-    //guardo informacion estadia
-    const transporte = await getTransporteById(paquete.transporte);
-    //guardo info de seguro
-    const seguro = await findSeguro(paquete.seguro);
     await newPaquete.save();
     return newPaquete;
 };
@@ -48,16 +35,16 @@ const UpdateState = async(idPaquete) =>{
     return paquete;
 };
 
-const detelePaquete = (paqueteId) =>{
+const eliminarPaquete = (paqueteId) =>{
     const paquete = await Paquete.findByIdAndDelete(paqueteId);
     return paquete;
 };
 
 module.exports = {
-    updatePaquete,
+    actualizarPaquete,
     UpdateState,
-    createPaquete,
+    newPaquete,
     findAllPaquete,
     findPaquete,
-    detelePaquete
-}
+    eliminarPaquete
+};
