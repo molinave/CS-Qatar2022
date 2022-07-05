@@ -11,18 +11,18 @@ const updateSeguro = async (seguro, idSeguro) => {
 };
 
 const createSeguro = async (seguro) =>{
-    const newSeguro = await new PaqueteViaje(seguro);
+    const newSeguro = await new Seguro(seguro);
     await newSeguro.save();
     return newSeguro;
 };
 
 const findSeguro = async(idSeguro) =>{
-    const seguro = await findById(idSeguro);
+    const seguro = await Seguro.findById(idSeguro);
     return seguro;
 };
 
 const deleteSeguro = async(idSeguro) =>{
-    const seguro = await PaqueteViaje.findByIdAndDelete(idSeguro);
+    const seguro = await Seguro.findByIdAndDelete(idSeguro);
     return seguro;
 };
 

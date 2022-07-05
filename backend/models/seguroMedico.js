@@ -14,10 +14,13 @@ const SeguroSchema = Schema({
         type: String,
         require:true
     },
-    "reinegro":{
+    "reintegro":{
         type: String,
         require:true
+    },
+    "price":{
+        type: Number,
+        require: true
     }
-
-})  
+})  ;
 module.exports = model('Seguro',SeguroSchema)

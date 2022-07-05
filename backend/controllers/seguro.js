@@ -1,5 +1,4 @@
-const { getEventoById } = require('../repositories/evento');
-const { createSeguro, updateSeguro, deleteSeguro, findSeguro } = require('../repositories/seguro');
+const { createSeguro, updateSeguro, deleteSeguro, findSeguro, findAllSeguro } = require('../repositories/seguro');
 
 const crearSeguro = async(req,res=response)=>{
     try{
@@ -34,13 +33,17 @@ const eliminarSeguro = async(req,res=respons)=>{
 
 const getAllSeguros = async(req,res=response)=>{
     const response = await findAllSeguro();
-    return response;
+    res.json({
+        response
+    });
 };
 
 const getSeguro = async(req,res=response)=>{
     const seguroId = req.params.seguroId;
-    const response = await getEventoById(seguroId);
-    return response;
+    const response = await findSeguro(seguroId);
+    res.json({
+        response
+    });
 };
 
 module.exports = {
