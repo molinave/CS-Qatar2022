@@ -1,13 +1,14 @@
-const {response, response}=require('express');
-const Paquete = require('../models/Paquete');
+const {response}=require('express');
 const url = require('url');
 const querystring = require('querystring');
-const { newPaquete, actualizarPaquete, eliminarPaquete, findPaquete } = require('../repositories/paquete');
+const { newPaquete, actualizarPaquete, eliminarPaquete, findPaquete, UpdateState } = require('../repositories/paquete');
 const { find } = require('../models/Paquete');
+const Paquete = require('../models/Paquete');
 
 const createPaquete = async(req,res=response)=>{
     try {
         const paquete = req.body;
+        paquete.precio *= 1.10;
         const response = await newPaquete(paquete);
         res.status(200).send(response);
     return paquete;
@@ -64,10 +65,23 @@ const detelePaquete = (req,res=response)=>{
     }
 };
 
+const actualizarEstado = async (req,res=response)=>{
+    try {
+        const paqueteId = req.params.paqueteId;
+        //console.log('estoy en controller');
+        //console.log(paqueteId);
+        const response = await UpdateState(paqueteId);
+        res.status(200).send(response);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
 module.exports ={
     createPaquete,
     updatePaquete,
     getPaqueteById,
     getAllPaquete,
     detelePaquete,
+    actualizarEstado
 }

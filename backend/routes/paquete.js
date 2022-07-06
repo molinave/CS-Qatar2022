@@ -5,6 +5,7 @@ const {
     getPaqueteById,
     getAllPaquete,
     detelePaquete,
+    actualizarEstado,
     
 }=require('../controllers/paquete');
 const router =Router();
@@ -21,8 +22,6 @@ router.get(
     '/:paqueteId',getPaqueteById
 )
 
-
-
 router.get(
     '/',getAllPaquete
 )
@@ -31,6 +30,9 @@ router.delete(
     '/:paqueteId',detelePaquete
 )
 
+router.patch(
+    '/actualizarEstado/:paqueteId',actualizarEstado
+)
 
 
 module.exports = router;

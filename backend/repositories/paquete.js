@@ -13,6 +13,8 @@ const actualizarPaquete = async (paquete, idPaquete) => {
 
 const newPaquete = async (paquete) =>{
     const newPaquete = await new Paquete(paquete);
+    //const gananacia = 1.10;
+    //newPaquete.precio = newPaquete*gananacia;
     await newPaquete.save();
     return newPaquete;
 };
@@ -24,13 +26,17 @@ const findPaquete = async(idPaquete) =>{
 
 const UpdateState = async(idPaquete) =>{
     const paquete = await Paquete.findById(idPaquete);
-    if (paquete.estado = 'Reservado'){
-        paquete.estado = 'Disponible';
+    const estado = paquete.estado;//.toLowwerCase();
+    console.log('estoy en repositories');
+    console.log(estado);
+    if (estado == 'reservado'){
+        paquete.estado = 'disponible';
     }else{
-        if (paquete.estado = 'Disponible'){
-            paquete.estado = 'Reservado';
+        if (estado == 'disponible'){
+            paquete.estado = 'reservado';
         };
     };
+    console.log(paquete)
     await paquete.save();
     return paquete;
 };

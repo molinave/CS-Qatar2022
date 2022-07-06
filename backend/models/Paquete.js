@@ -12,7 +12,7 @@ const PaqueteSchema = Schema({
             require:true
         },
         hoteleria:{
-            type: ["si","no"],
+            type: String,
             require:true
         },
         reinegro:{
@@ -27,14 +27,14 @@ const PaqueteSchema = Schema({
         },
         cant_partidos:{
             type: Number,
-            require:false
+            require:false,
         },
         estadio:{
-            type: String,
+            type: Array,
             require:true
         },
         fecha_partido:{
-            type: String,             
+            type: Array,             
             require:true
         },
         fase:{
@@ -92,7 +92,7 @@ const PaqueteSchema = Schema({
     },
     estado:{
         type: String,
-        require:true
+        default:"disponible"
     },
     stock:{
         type: Number,
