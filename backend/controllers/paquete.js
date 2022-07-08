@@ -1,9 +1,9 @@
 const {response}=require('express');
 const url = require('url');
 const querystring = require('querystring');
-const { newPaquete, actualizarPaquete, eliminarPaquete, findPaquete, UpdateState } = require('../repositories/paquete');
+const { newPaquete, actualizarPaquete, eliminarPaquete, findPaquete, UpdateState , findAllPaquete} = require('../repositories/paquete');
 const { find } = require('../models/Paquete');
-const Paquete = require('../models/Paquete');
+//const Paquete = require('../models/Paquete');
 
 const createPaquete = async(req,res=response)=>{
     try {
@@ -41,16 +41,17 @@ const getAllPaquete = async(req,res=response)=>{
     let parsedUrl= url.parse(req.url);
     let parsedQuery=querystring.parse(parsedUrl.query);
     const{estrella,partidos,puntuacion,fase,vuelo}=parsedQuery;
-    console.log(estrella,partidos,puntuacion,fase,vuelo)
+    //console.log(estrella,partidos,puntuacion,fase,vuelo)
     const query= {};
     query['estado']='disponible'
-    if(estrella) query['hotel.estrellas']=estrella
-    if(partidos) query['partido.cant_partidos']=partidos
-    if(puntuacion) query['hotel.puntuacion']=puntuacion
-    if(fase) query['partido.fase']=fase
-    const paquetes=await Paquete.find(query)
+    if(estrella) query['hotel.estrellas']=estrella;
+    if(partidos) query['partido.cant_partidos']=partidos;
+    if(puntuacion) query['hotel.puntuacion']=puntuacion;
+    if(fase) query['partido.fase']=fase;
+
+    const response=await findAllPaquete(query);//Paquete.find(query)
     res.json({
-        paquetes
+        response
     })
 }
 

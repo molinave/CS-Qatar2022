@@ -13,8 +13,6 @@ const actualizarPaquete = async (paquete, idPaquete) => {
 
 const newPaquete = async (paquete) =>{
     const newPaquete = await new Paquete(paquete);
-    //const gananacia = 1.10;
-    //newPaquete.precio = newPaquete*gananacia;
     await newPaquete.save();
     return newPaquete;
 };
