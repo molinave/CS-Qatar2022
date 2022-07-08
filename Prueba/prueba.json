@@ -1,0 +1,43 @@
+{
+    "seguro":{
+        "name":"QatarMedical",
+        "asistencia":"Completa",
+        "hoteleria":"Sin definir",
+        "reinegro":"Parcial"
+    },
+    "partido":{
+        "name":[
+            "Argentina - Arabia Saudita",
+            "Argentina - Mexico",
+            "Argentina - Polonia"
+        ],
+        "estadio":[
+            "Estadio Lusail",
+            "Estadio Lusail",
+            "Stadium 974"
+        ],
+        "fecha_partido":[
+            "22-11-2022",
+            "26-11-2022",
+            "30-11-2022"
+        ],
+        "fase":"Grupos",
+        "sector":"Platea",
+    },
+    "hotel":{
+        "name":"Plaza Inn Doha",
+        "tipo_estadia":"Hotel",
+        "estrellas":5,
+        "puntuacion":8.7
+    },
+    "transporte":{
+        "name":"Avion",
+        "tipo":"Aereo",
+        "fecha_salida":"29-11-2022",
+        "fecha_llegada":"30-11-2022",
+        "duracion":10
+    },
+    "precio":5000,
+    "estado":"disponible",
+    "stock":5
+}

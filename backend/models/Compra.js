@@ -14,7 +14,6 @@ const CompraSchema = Schema({
         email: {
             type: String,
             require: true,
-            unique: true
         },
         telefono: {
             type: Number,

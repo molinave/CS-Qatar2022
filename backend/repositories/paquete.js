@@ -27,8 +27,8 @@ const findPaquete = async(idPaquete) =>{
 const UpdateState = async(idPaquete) =>{
     const paquete = await Paquete.findById(idPaquete);
     const estado = paquete.estado;//.toLowwerCase();
-    console.log('estoy en repositories');
-    console.log(estado);
+    //console.log('estoy en repositories');
+    //console.log(estado);
     if (estado == 'reservado'){
         paquete.estado = 'disponible';
     }else{
